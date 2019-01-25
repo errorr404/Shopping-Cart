@@ -14,7 +14,7 @@ class ProductProvider extends React.Component {
         modalProduct:detailProduct,
         cartSubTotal:0,
         cartTax:0,
-        cartToatal:0,
+        cartTotal:0,
     }
     componentDidMount(){
         this.setProducts()
@@ -55,7 +55,8 @@ class ProductProvider extends React.Component {
         this.setState(()=>{
             return {products:tempProducts,cart:[...this.state.cart,product]}
         },()=>{
-            console.log(this.state)
+            // console.log(this.state)
+            this.addTotals()
         })
     }
   
@@ -72,16 +73,30 @@ class ProductProvider extends React.Component {
     }
 
     increment = (id)=>{
-
+        console.log('increment')
     }
     decrement = (id)=>{
-
+        console.log('deccrement')
     }
     removeItem = (id)=>{
-      
+        console.log('remove')
     }
     clearCart = ()=>{
-
+        console.log('clear-cart')
+    }
+    addTotals = ()=>{
+        var subTotal = 0
+        this.state.cart.map(item=>(subTotal+=item.total))
+        const tempTax = subTotal * 0.1
+        const tax = parseFloat(tempTax.toFixed(2))
+        const total = subTotal + tax
+        this.setState(()=>{
+            return{
+                cartSubTotal:subTotal,
+                cartTax:tax,
+                cartTotal:total
+            }
+        })
     }
     render(){
         return(
