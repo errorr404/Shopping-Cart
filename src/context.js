@@ -7,8 +7,22 @@ const ProductContext = React.createContext();  // created the cotext object
 //Consumer
 class ProductProvider extends React.Component {
     state = {
-        products:storeProducts,
+        products:[],
         detailProduct
+    }
+    componentDidMount(){
+        this.setProducts()
+    }
+
+    setProducts =()=>{
+        let tempProducts = []
+        storeProducts.forEach(item=>{
+            const singleItem = {...item}
+            tempProducts=[...tempProducts,singleItem]
+        })
+        this.setState(()=>{
+            return {products:tempProducts}
+        })
     }
     handleDetail = () =>{
         console.log('hello from detail')
@@ -16,6 +30,7 @@ class ProductProvider extends React.Component {
     addToCart = () =>{
         console.log('hello from addToCart')
     }
+  
     render(){
         return(
             <ProductContext.Provider value={{
