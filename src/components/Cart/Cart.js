@@ -1,11 +1,12 @@
 import React from 'react'
+import Title from '../Title'
 
 class Cart extends React.Component {
     render(){
         return(
-            <div>
-                <h3>Hello from Cart</h3>
-            </div>
+           <section>
+               <Title name="your" title="cart" />
+           </section>
         )
     }
 }
