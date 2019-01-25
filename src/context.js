@@ -8,7 +8,8 @@ const ProductContext = React.createContext();  // created the cotext object
 class ProductProvider extends React.Component {
     state = {
         products:[],
-        detailProduct
+        detailProduct: detailProduct,
+        cart:[]
     }
     componentDidMount(){
         this.setProducts()
@@ -37,7 +38,20 @@ class ProductProvider extends React.Component {
         })
     }
     addToCart = (id) =>{
-        console.log('hello from addToCart',id)
+        // console.log('hello from addToCart',id)
+        let tempProducts = [...this.state.products]
+        const index= tempProducts.indexOf(this.getItem(id))
+        const product = tempProducts[index]
+        product.inCart = true
+        product.count=1
+        const price = product.price
+        product.total = price
+
+        this.setState(()=>{
+            return {products:tempProducts,cart:[...this.state.cart,product]}
+        },()=>{
+            console.log(this.state)
+        })
     }
   
     render(){
