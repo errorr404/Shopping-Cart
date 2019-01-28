@@ -10,6 +10,7 @@ import Default from './components/Default'
 import Modal from './components/Modal'
 class App extends Component {
   render() {
+    // console.log('env variable',process.env.REACT_APP_APP_ID)
     return (
       <React.Fragment>
        <Navbar />
